@@ -1,4 +1,32 @@
 document.addEventListener("DOMContentLoaded", () => {
+	/* ── Hamburger menu ── */
+	const hamburger = document.getElementById("hamburger");
+	const mobileMenu = document.getElementById("mobile-menu");
+	const menuOverlay = document.getElementById("menu-overlay");
+
+	const closeMenu = () => {
+		mobileMenu.classList.remove("open");
+		menuOverlay.classList.remove("open");
+		hamburger.classList.remove("active");
+		hamburger.setAttribute("aria-expanded", "false");
+		mobileMenu.setAttribute("aria-hidden", "true");
+	};
+
+	if (hamburger && mobileMenu) {
+		hamburger.addEventListener("click", () => {
+			const isOpen = mobileMenu.classList.toggle("open");
+			menuOverlay.classList.toggle("open", isOpen);
+			hamburger.classList.toggle("active", isOpen);
+			hamburger.setAttribute("aria-expanded", String(isOpen));
+			mobileMenu.setAttribute("aria-hidden", String(!isOpen));
+		});
+
+		mobileMenu.querySelectorAll("a").forEach((link) => {
+			link.addEventListener("click", closeMenu);
+		});
+
+		menuOverlay.addEventListener("click", closeMenu);
+	}
 	const elementsToType = document.querySelectorAll(
 		".left-filhos h1, .left-filhos h3, .left-filhos > p:not(.text-one)"
 	);
