@@ -1,41 +1,108 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <title>Portfólio Gabriel Almeida</title>
 </head>
 <header>
-    <h2>Gabriel Almeida.Dev</h2>
+    <h2>
+        <\ />Gabriel Almeida.Dev
+    </h2>
     <div class="elements-header">
         <a href="">Sobre</a>
         <a href="">Projetos</a>
         <a href="">Skills</a>
         <a href="https://wa.me/11976052590" target="_blank">
-            <button  class="btn">Contato</button>
+            <button class="btn">Contato</button>
         </a>
     </div>
 </header>
+
 <body>
     <section class="container-1">
         <div class="container-left">
-                <div class="left-filhos">
-                    <p class="text-one">Disponível para propostas • Remoto / Híbrido</p>
-                    <h1>Gabriel Carlos <br><span>Alexandre de Almeida</span></h1>
-                    <h3>Software Engineer</h3>
-                    <p>Eu projeto e entrego produtos web escaláveis com foco em performance,<br> confiabilidade e impacto mensurável. Experiência em arquitetura, cloud e liderança técnica.</p>
-                    <div class="social-links">
-                        <a href="">GitHub</a>
-                        <a href="">LinkedIn</a>
-                        <a href="mailto:contato.gabrielcarlos@gmail.com">contato.gabrielcarlos@gmail.com</a>
-                    </div><!--social-links-->
-                    </div> <!--left-filhos-->
-            </div><!--container-left-->
-            <div class="container-right">
-            
+            <div class="left-filhos">
+                <p class="text-one">Disponível para propostas • Remoto / Híbrido</p>
+                <h1>Gabriel Carlos <br><span>Alexandre de Almeida</span></h1>
+                <h3>Software Engineer</h3>
+                <p>Eu projeto e entrego produtos web escaláveis com foco em performance,<br> confiabilidade e impacto
+                    mensurável. Experiência em arquitetura, cloud e liderança técnica.</p>
+                <div class="social-links">
+                    <a href="https://github.com/Gabriel100-Pro" target="_blank">GitHub</a>
+                    <a href="https://linkedin.com/in/gabrielcarlosalexandre" target="_blank">LinkedIn</a>
+                    <a href="mailto:contato.gabrielcarlos@gmail.com">contato.gabrielcarlos@gmail.com</a>
+                </div><!--social-links-->
+                <div class="skills">
+                    <div class="skills-title">
+                        <span>Stack</span>
+                        <a href="">HTML • CSS • JS</a>
+                    </div>
+                    <div class="skills-title">
+                        <span>Ferramentas</span>
+                        <a href="">Git • GitHub</a>
+                    </div>
+                    <div class="skills-title">
+                        <span>Foco</span>
+                        <a href="">Front-End</a>
+                    </div>
+                </div><!--skills-->
+            </div> <!--left-filhos-->
+        </div><!--container-left-->
+        <div class="container-right">
+            <div class="hero__card" aria-hidden="true">
+                <div class="code-card">
+                    <div class="code-card__top">
+                        <span class="dot dot--red"></span>
+                        <span class="dot dot--yellow"></span>
+                        <span class="dot dot--green"></span>
+                        <span class="code-card__title">portfolio.js</span>
+                    </div>
+                    <pre class="code-card__pre"><code>// sobre mim
+const dev = {
+  nome: "Gabriel",
+  cargo: "Desenvolvedor Frontend",
+  stack: ["HTML", "CSS", "JavaScript", "React"],
+  ferramentas: ["Git", "GitHub", "VSCode"],
+};
+
+// minhas habilidades
+const skills = [
+  "UI responsiva",
+  "componentização",
+  "consumo de APIs",
+  "versionamento com Git",
+];
+
+// minha forma de trabalhar
+function build() {
+  return {
+    foco: "interfaces modernas, acessíveis e bem estruturadas",
+    codigo: "limpo, organizado e fácil de manter",
+    aprendizado: "constante evolução e boas práticas",
+    objetivo: "crescer como desenvolvedor e entregar valor real",
+  };
+}
+
+// execução
+function start() {
+  console.log("🚀 Iniciando aplicação...");
+  console.log("👨‍💻 Dev:", dev.nome);
+  console.log("🛠️ Stack:", dev.stack.join(", "));
+  console.log("📦 Skills:", skills.join(", "));
+  console.log("✨ Build:", build());
+}
+
+start();</code></pre>
+                </div>
+            </div>
+        </div>
         </div>
     </section>
 
 </body>
+
 </html>
