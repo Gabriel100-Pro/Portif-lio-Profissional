@@ -371,6 +371,102 @@ p {
     display: block;
 }
 
+
+/* ===== MARQUEE (CORRIGIDO) ===== */
+.tool-marquee{
+  margin-top: -150px;
+  position: relative;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--surface) 70%, transparent);
+  overflow: hidden;
+  padding: 14px 0 10px;
+}
+
+/* o seu CSS dependia disso, e no HTML não existia */
+.tool-marquee__viewport{
+  overflow: hidden;
+}
+
+.tool-marquee__track{
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-left 16s linear infinite;
+}
+
+/* pausa no hover */
+.tool-marquee:hover .tool-marquee__track,
+.tool-marquee:focus-within .tool-marquee__track{
+  animation-play-state: paused;
+}
+
+.tool-marquee__group{
+  display: inline-flex;
+  align-items: center;
+  gap: 80px;
+  padding: 0 18px;
+  flex-shrink: 0;
+}
+
+.container{
+  width: min(100% - 32px, var(--container));
+  margin-inline: auto;
+}
+
+/* ajuste: se as duas listas não tiverem exatamente a mesma largura,
+   pode dar "pulo". Por isso evite conteúdos diferentes entre os grupos. */
+
+.tool-marquee__img{
+  object-fit: contain;
+  filter: drop-shadow(0 10px 22px rgba(0,0,0,.18));
+  opacity: .95;
+  cursor: pointer;
+}
+
+.tool-marquee__img--wide{
+  width: auto;
+  height: 42px;
+  max-width: 240px;
+  padding: 6px 10px;
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--surface) 70%, transparent);
+  border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+}
+
+html[data-theme="light"] .tool-marquee__img--wide{
+  background: rgba(255,255,255,.75);
+}
+
+/* fades */
+.tool-marquee__fade{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width: 72px;
+  pointer-events:none;
+  z-index: 2;
+}
+.tool-marquee__fade--left{
+  left:0;
+  background: linear-gradient(90deg, var(--bg), transparent);
+}
+.tool-marquee__fade--right{
+  right:0;
+  background: linear-gradient(270deg, var(--bg), transparent);
+}
+
+@keyframes marquee-left{
+  from{ transform: translate3d(0,0,0); }
+  to{ transform: translate3d(-50%,0,0); }
+}
+
+
+
+@media (prefers-reduced-motion: reduce){
+  .tool-marquee__track{ animation: none; }
+}
+
 /* ── Tablet ─────────────────────────────────────────── ≤ 1024px ── */
 @media (max-width: 1024px) {
     .elements-header {
@@ -402,6 +498,8 @@ p {
     .skills {
         gap: 20px;
     }
+
+    
 }
 
 /* ── Mobile ──────────────────────────────────────────── ≤ 768px ── */
@@ -462,7 +560,12 @@ p {
         flex-wrap: wrap;
         gap: 12px;
     }
+
+    .tool-marquee{
+  margin-top: -70px;
 }
+}
+
 
 /* ── Mobile pequeno ──────────────────────────────────── ≤ 480px ── */
 @media (max-width: 480px) {
@@ -496,4 +599,8 @@ p {
         font-size: 0.78rem;
         padding: 14px;
     }
+
+    .tool-marquee{
+  margin-top: -50px;
+}
 }

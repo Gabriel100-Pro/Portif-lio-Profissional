@@ -116,6 +116,36 @@ start();</code></pre>
         </div>
     </section>
 
+    <!-- MARQUEE: CORRIGIDO (agora a animação funciona) -->
+      <div class="container">
+        <section class="tool-marquee" aria-label="Tecnologias que eu uso">
+          <div class="tool-marquee__fade tool-marquee__fade--left" aria-hidden="true"></div>
+          <div class="tool-marquee__fade tool-marquee__fade--right" aria-hidden="true"></div>
+
+          <!-- IMPORTANTE: viewport + track + dois grupos iguais -->
+          <div class="tool-marquee__viewport">
+            <div class="tool-marquee__track" aria-hidden="false">
+              <div class="tool-marquee__group">
+                <img class="tool-marquee__img tool-marquee__img--wide" src="assets/item1-1.png" alt="JavaScript" loading="lazy">
+                <img class="tool-marquee__img tool-marquee__img--wide" src="assets/item1-10.png" alt="CSS" loading="lazy">
+                <img class="tool-marquee__img tool-marquee__img--wide" src="assets/item1-3.png" alt="JavaScript" loading="lazy">
+                <img class="tool-marquee__img tool-marquee__img--wide" src="assets/item1-6.png" alt="Git" loading="lazy">
+              </div>
+
+              <!-- duplicado para loop infinito -->
+              <div class="tool-marquee__group" aria-hidden="true">
+                <img class="tool-marquee__img tool-marquee__img--wide" src="assets/item1-1.png" alt="JavaScript" loading="lazy">
+                <img class="tool-marquee__img tool-marquee__img--wide" src="assets/item1-10.png" alt="CSS" loading="lazy">
+                <img class="tool-marquee__img tool-marquee__img--wide" src="assets/item1-3.png" alt="JavaScript" loading="lazy">
+                <img class="tool-marquee__img tool-marquee__img--wide" src="assets/item1-6.png" alt="Git" loading="lazy">
+              </div>
+            </div>
+          </div>
+
+          
+        </section>
+      </div>
+
     <script src="functions.js"></script>
 </body>
 
