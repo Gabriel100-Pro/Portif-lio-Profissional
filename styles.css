@@ -467,6 +467,22 @@ html[data-theme="light"] .tool-marquee__img--wide{
   .tool-marquee__track{ animation: none; }
 }
 
+
+.icon{
+    display: flex;
+  justify-content: space-between; /* joga um pra esquerda e outro pra direita */
+  align-items: center;
+  display: flex;
+}
+.chat-icon{
+    position: fixed;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    margin-top: -70px;
+    cursor: pointer;
+}
+
 /* ── Tablet ─────────────────────────────────────────── ≤ 1024px ── */
 @media (max-width: 1024px) {
     .elements-header {
