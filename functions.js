@@ -1,4 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
+	const rootElement = document.documentElement;
+	const themeToggle = document.getElementById("theme-toggle");
+	const themeToggleInner = themeToggle?.querySelector(".header-toggle__inner");
+	const savedTheme = localStorage.getItem("portfolio-theme");
+
+	const setTheme = (theme) => {
+		if (theme === "light") {
+			rootElement.setAttribute("data-theme", "light");
+			themeToggle?.setAttribute("aria-pressed", "true");
+			if (themeToggleInner) themeToggleInner.textContent = "☀";
+			return;
+		}
+
+		rootElement.removeAttribute("data-theme");
+		themeToggle?.setAttribute("aria-pressed", "false");
+		if (themeToggleInner) themeToggleInner.textContent = "☾";
+	};
+
+	setTheme(savedTheme === "light" ? "light" : "dark");
+
+	themeToggle?.addEventListener("click", () => {
+		const isLight = rootElement.getAttribute("data-theme") === "light";
+		const nextTheme = isLight ? "dark" : "light";
+		setTheme(nextTheme);
+		localStorage.setItem("portfolio-theme", nextTheme);
+	});
+
 	/* ── Hamburger menu ── */
 	const hamburger = document.getElementById("hamburger");
 	const mobileMenu = document.getElementById("mobile-menu");
