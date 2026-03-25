@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const hamburger = document.getElementById("hamburger");
 	const mobileMenu = document.getElementById("mobile-menu");
 	const menuOverlay = document.getElementById("menu-overlay");
+	const mobileMenuClose = document.getElementById("mobile-menu-close");
 
 	const closeMenu = () => {
 		mobileMenu.classList.remove("open");
@@ -25,7 +26,15 @@ document.addEventListener("DOMContentLoaded", () => {
 			link.addEventListener("click", closeMenu);
 		});
 
+		mobileMenuClose?.addEventListener("click", closeMenu);
+
 		menuOverlay.addEventListener("click", closeMenu);
+
+		document.addEventListener("keydown", (event) => {
+			if (event.key === "Escape") {
+				closeMenu();
+			}
+		});
 	}
 	const elementsToType = document.querySelectorAll(
 		".left-filhos h1, .left-filhos h3, .left-filhos > p:not(.text-one)"
