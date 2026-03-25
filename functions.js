@@ -123,7 +123,7 @@ function setupToolMarquee() {
   const fillMarquee = () => {
     sourceGroup.innerHTML = baseMarkup;
 
-    const targetWidth = Math.ceil(viewport.clientWidth * 2.0);
+    const targetWidth = Math.ceil(viewport.clientWidth * 1.0);
 
     while (sourceGroup.scrollWidth < targetWidth) {
       sourceGroup.insertAdjacentHTML("beforeend", baseMarkup);
