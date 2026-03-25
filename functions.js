@@ -2,24 +2,49 @@ document.addEventListener("DOMContentLoaded", () => {
 	const rootElement = document.documentElement;
 	const themeToggle = document.getElementById("theme-toggle");
 	const themeToggleInner = themeToggle?.querySelector(".header-toggle__inner");
+	const mobileThemeToggle = document.getElementById("theme-toggle-mobile");
+	const mobileThemeToggleIcon = document.getElementById("theme-toggle-mobile-icon");
+	const mobileThemeToggleText = document.getElementById("theme-toggle-mobile-text");
 	const savedTheme = localStorage.getItem("portfolio-theme");
+
+	const updateThemeControls = (isLight) => {
+		themeToggle?.setAttribute("aria-pressed", String(isLight));
+		mobileThemeToggle?.setAttribute("aria-pressed", String(isLight));
+
+		if (themeToggleInner) {
+			themeToggleInner.textContent = isLight ? "☀" : "☾";
+		}
+
+		if (mobileThemeToggleIcon) {
+			mobileThemeToggleIcon.textContent = isLight ? "☾" : "☀";
+		}
+
+		if (mobileThemeToggleText) {
+			mobileThemeToggleText.textContent = isLight ? "Modo Escuro" : "Modo Claro";
+		}
+	};
 
 	const setTheme = (theme) => {
 		if (theme === "light") {
 			rootElement.setAttribute("data-theme", "light");
-			themeToggle?.setAttribute("aria-pressed", "true");
-			if (themeToggleInner) themeToggleInner.textContent = "☀";
+			updateThemeControls(true);
 			return;
 		}
 
 		rootElement.removeAttribute("data-theme");
-		themeToggle?.setAttribute("aria-pressed", "false");
-		if (themeToggleInner) themeToggleInner.textContent = "☾";
+		updateThemeControls(false);
 	};
 
 	setTheme(savedTheme === "light" ? "light" : "dark");
 
 	themeToggle?.addEventListener("click", () => {
+		const isLight = rootElement.getAttribute("data-theme") === "light";
+		const nextTheme = isLight ? "dark" : "light";
+		setTheme(nextTheme);
+		localStorage.setItem("portfolio-theme", nextTheme);
+	});
+
+	mobileThemeToggle?.addEventListener("click", () => {
 		const isLight = rootElement.getAttribute("data-theme") === "light";
 		const nextTheme = isLight ? "dark" : "light";
 		setTheme(nextTheme);
