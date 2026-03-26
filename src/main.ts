@@ -242,6 +242,70 @@ const setupContactFormRedirect = (): void => {
 	nextField.value = currentUrl.toString();
 };
 
+const setupTimelineCursor = (): void => {
+	const timeline = document.querySelector<HTMLElement>(".work-timeline");
+	const progress = document.querySelector<HTMLElement>(".timeline-progress");
+	const cursor = document.querySelector<HTMLElement>(".timeline-cursor");
+	const items = Array.from(document.querySelectorAll<HTMLElement>(".timeline-item"));
+
+	if (!timeline || !progress || !cursor || !items.length) {
+		return;
+	}
+
+	let activeItem = items[0];
+	const lineBottomInset = 8;
+	const getBaseProgressHeight = (): number => {
+		const progressTop = Number.parseFloat(window.getComputedStyle(progress).top) || 0;
+		const cursorTop = Number.parseFloat(window.getComputedStyle(cursor).top) || 0;
+
+		return cursorTop - progressTop + cursor.offsetHeight / 2;
+	};
+
+	const getFullProgressHeight = (): number => {
+		const progressTop = Number.parseFloat(window.getComputedStyle(progress).top) || 0;
+
+		return timeline.offsetHeight - progressTop - lineBottomInset;
+	};
+
+	const moveTo = (item: HTMLElement): void => {
+		const timelineRect = timeline.getBoundingClientRect();
+		const itemRect = item.getBoundingClientRect();
+		const itemIndex = items.indexOf(item);
+		const targetOffset = itemRect.top - timelineRect.top;
+		const progressHeight = itemIndex === items.length - 1
+			? getFullProgressHeight()
+			: getBaseProgressHeight() + targetOffset;
+
+		cursor.style.transform = `translateY(${targetOffset}px)`;
+		progress.style.height = `${progressHeight}px`;
+		items.forEach((i) => i.querySelector(".work-card")?.classList.remove("work-card--active"));
+		items.forEach((timelineItem, index) => {
+			timelineItem.querySelector(".timeline-dot")?.classList.toggle("timeline-dot--completed", index <= itemIndex);
+		});
+		item.querySelector(".work-card")?.classList.add("work-card--active");
+		activeItem = item;
+	};
+
+	// position cursor on first item without transition on first render
+	cursor.style.transition = "none";
+	progress.style.transition = "none";
+	moveTo(activeItem);
+	window.requestAnimationFrame(() => {
+		cursor.style.transition = "";
+		progress.style.transition = "";
+	});
+
+	items.forEach((item) => {
+		item.addEventListener("click", () => {
+			moveTo(item);
+		});
+	});
+
+	window.addEventListener("resize", () => {
+		moveTo(activeItem);
+	});
+};
+
 const initializeApp = (): void => {
 	const globalWindow = window as Window & { __portfolioAppInitialized?: boolean };
 
@@ -254,6 +318,7 @@ const initializeApp = (): void => {
 	setupThemeAndHeroTyping();
 	setupToolMarquee();
 	setupContactFormRedirect();
+	setupTimelineCursor();
 };
 
 if (document.readyState === "loading") {
