@@ -141,7 +141,7 @@
             <span class="mobile-menu__theme-icon" id="theme-toggle-mobile-icon" aria-hidden="true">☀</span>
             <span class="mobile-menu__theme-text" id="theme-toggle-mobile-text">Modo Claro</span>
         </button>
-    </div>
+    </div><!--mobile-menu__theme-wrap-->
 </nav>
 <div class="menu-overlay" id="menu-overlay"></div>
 
@@ -177,15 +177,15 @@
                     <div class="skills-title">
                         <span>Stack</span>
                         <a href="">HTML • CSS • JavaScript • TypeScript</a>
-                    </div>
+                        </div><!--skills-title-->
                     <div class="skills-title">
                         <span>Ferramentas</span>
                         <a href="">Git • GitHub</a>
-                    </div>
+                        </div><!--skills-title-->
                     <div class="skills-title">
                         <span>Foco</span>
                         <a href="">Front-End</a>
-                    </div>
+                        </div><!--skills-title-->
                 </div><!--skills-->
             </div> <!--left-filhos-->
         </div><!--container-left-->
@@ -197,7 +197,7 @@
                         <span class="dot dot--yellow"></span>
                         <span class="dot dot--green"></span>
                         <span class="code-card__title">portfolio.js</span>
-                    </div>
+                    </div><!--code-card__top-->
                     <pre class="code-card__pre"><code>// sobre mim
 const dev = {
   nome: "Gabriel",
@@ -233,10 +233,10 @@ function start() {
 }
 
 start();</code></pre>
-                </div>
-            </div>
-        </div>
-        </div>
+                </div><!--code-card-->
+            </div><!--hero__card-->
+        </div><!--container-right-->
+        </div><!--container-1-wrapper-->
     </section>
 
     <!-- MARQUEE: CORRIGIDO (agora a animação funciona) -->
@@ -257,7 +257,7 @@ start();</code></pre>
                             loading="lazy">
                         <img class="tool-marquee__img tool-marquee__img--wide" src="assets/item1-6.png" alt="Git"
                             loading="lazy">
-                    </div>
+                    </div><!--tool-marquee__group-->
 
                     <!-- duplicado para loop infinito -->
                     <div class="tool-marquee__group" aria-hidden="true">
@@ -269,41 +269,41 @@ start();</code></pre>
                             loading="lazy">
                         <img class="tool-marquee__img tool-marquee__img--wide" src="assets/item1-6.png" alt="Git"
                             loading="lazy">
-                    </div>
-                </div>
-            </div>
+                    </div><!--tool-marquee__group-->
+                </div><!--tool-marquee__track-->
+            </div><!--tool-marquee__viewport-->
 
 
         </section>
-    </div>
+    </div><!--container-->
 
     <section class="about-section" id="sobre" aria-label="Sobre mim">
         <div class="about-header">
             <h2>Sobre <span>mim</span></h2>
             <p>Um pouco da minha história e o que me motiva a construir produtos digitais.</p>
-        </div>
+        </div><!--about-header-->
 
         <div class="about-panel">
             <div class="about-panel__media" aria-hidden="true">
                 <div class="about-panel__photo">GA</div>
-            </div>
+            </div><!--about-panel__media-->
             <div class="about-panel__content">
                 <p>
-                    Sou desenvolvedor frontend com foco em criar interfaces claras, responsivas e fáceis de usar.
-                    Gosto de transformar requisitos complexos em experiências simples e eficientes.
+                    Sou desenvolvedor Front-End freelancer, criando interfaces modernas, responsivas e fáceis de usar, principalmente para pequenas empresas.
+                    Trago comigo disciplina, resiliência, trabalho em equipe e espírito de liderança, valores que desenvolvi durante minha experiência no Exército Brasileiro.
                 </p>
                 <p>
-                    Minha base em disciplina, atendimento ao público e trabalho em equipe influencia diretamente
-                    minha forma de atuar em tecnologia: consistência, comunicação objetiva e compromisso com resultado.
+                    Também já atuei com vendas, o que me deu uma visão mais prática sobre como atender diferentes tipos de clientes.
+                    Hoje, uso tudo isso para desenvolver projetos organizados, funcionais e que realmente ajudam no dia a dia de quem precisa estar presente no digital.
                 </p>
-            </div>
-        </div>
+            </div><!--about-panel__content-->
+        </div><!--about-panel-->
 
         <div class="about-highlights">
             <article class="about-highlight">
                 <span class="about-highlight__icon" aria-hidden="true">✦</span>
                 <h3>O que me move</h3>
-                <p>Resolver problemas reais com código limpo, performance e atenção aos detalhes da interface.</p>
+                <p>Poder ajudar pessoas através da tecnologia, de forma que elas também possam correr atrás de seus sonhos e conquistá-los!</p>
             </article>
 
             <article class="about-highlight">
@@ -315,9 +315,9 @@ start();</code></pre>
             <article class="about-highlight">
                 <span class="about-highlight__icon" aria-hidden="true">❤</span>
                 <h3>O que valorizo</h3>
-                <p>Colaboração, clareza no processo e projetos que entregam valor para quem realmente usa.</p>
+                <p>Trabalho em equipe, verdade e entrega de soluções para problemas reais.  </p>
             </article>
-        </div>
+        </div><!--about-highlights-->
 
         <div class="about-cta">
             <a class="about-cv-btn" href="./curriculo-gabriel-carlos.pdf" target="_blank" rel="noopener noreferrer">
@@ -328,14 +328,14 @@ start();</code></pre>
                 </svg>
                 <span>Ver currículo completo</span>
             </a>
-        </div>
+        </div><!--about-cta-->
     </section>
 
     <section class="work-section" id="experiencias">
         <div class="work-header">
             <h2>Onde eu <span>trabalhei</span></h2>
             <p>Meu histórico profissional até aqui</p>
-        </div>
+        </div><!--work-header-->
 
         <div class="work-timeline">
             <div class="timeline-line" aria-hidden="true"></div>
@@ -351,31 +351,31 @@ start();</code></pre>
                                 <path d="M9 18L3 12L9 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M15 6L21 12L15 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                        </div>
+                        </div><!--work-card__icon-wrap-->
                         <div class="work-card__info">
                             <h3>Freelancer</h3>
                             <span class="work-company">
                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 21H21M5 21V7L12 3L19 7V21M9 21V15H15V21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                 Autônomo
                             </span>
-                        </div>
+                        </div><!--work-card__info-->
                         <div class="work-card__date-wrap">
                             <span class="work-date">
                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M16 2V6M8 2V6M3 10H21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
                                 Mar 2026 – Atual
                             </span>
                             <span class="work-badge">ATUAL</span>
-                        </div>
-                    </div>
+                        </div><!--work-card__date-wrap-->
+                    </div><!--work-card__header-->
                     <p>Criação de sites para pequenas empresas, desenvolvendo interfaces responsivas e modernas com foco em presença digital, performance e boa experiência para o usuário.</p>
                     <div class="work-tags">
                         <span class="work-tag">HTML</span>
                         <span class="work-tag">CSS</span>
                         <span class="work-tag">JavaScript</span>
                         <span class="work-tag">TypeScript</span>
-                    </div>
-                </div>
-            </div>
+                    </div><!--work-tags-->
+                </div><!--work-card-->
+            </div><!--timeline-item-->
 
             <!-- Exército Brasileiro -->
             <div class="timeline-item">
@@ -385,31 +385,30 @@ start();</code></pre>
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 3L4 7V13C4 17.4183 7.58172 21 12 21C16.4183 21 20 17.4183 20 13V7L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
                             </svg>
-                        </div>
+                        </div><!--work-card__icon-wrap-->
                         <div class="work-card__info">
                             <h3>Serviço Militar</h3>
                             <span class="work-company">
                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 21H21M5 21V7L12 3L19 7V21M9 21V15H15V21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                 Exército Brasileiro
                             </span>
-                        </div>
+                        </div><!--work-card__info-->
                         <div class="work-card__date-wrap">
                             <span class="work-date">
                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M16 2V6M8 2V6M3 10H21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
                                 Mar 2023 – Fev 2026
                             </span>
-                        </div>
-                    </div>
+                        </div><!--work-card__date-wrap-->
+                    </div><!--work-card__header-->
                     <p>Serviço militar obrigatório cumprindo deveres cívicos com dedicação. Período de grande desenvolvimento pessoal, com foco em disciplina, liderança, trabalho em equipe e responsabilidade. Alcanssando a graduação de cabo em Maio de 2025.</p>
                     <div class="work-tags">
                         <span class="work-tag">Liderança</span>
                         <span class="work-tag">Trabalho em Equipe</span>
                         <span class="work-tag">Disciplina</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Vendedor -->
+                    </div><!--work-tags-->
+                </div><!--work-card-->
+            </div><!--timeline-item-->
+            
             <div class="timeline-item">
                 <div class="work-card">
                     <div class="work-card__header">
@@ -419,38 +418,38 @@ start();</code></pre>
                                 <path d="M3 6H21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
                                 <path d="M16 10C16 12.2091 14.2091 14 12 14C9.79086 14 8 12.2091 8 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
                             </svg>
-                        </div>
+                        </div><!--work-card__icon-wrap-->
                         <div class="work-card__info">
                             <h3>Vendedor</h3>
                             <span class="work-company">
                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 21H21M5 21V7L12 3L19 7V21M9 21V15H15V21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                 Centro de São Paulo
                             </span>
-                        </div>
+                        </div><!--work-card__info-->
                         <div class="work-card__date-wrap">
                             <span class="work-date">
                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M16 2V6M8 2V6M3 10H21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
                                 Ago 2020 – Fev 2023
                             </span>
-                        </div>
-                    </div>
+                        </div><!--work-card__date-wrap-->
+                    </div><!--work-card__header-->
                     <p>Atendimento ao cliente e vendas no comércio do centro de São Paulo. Desenvolvi habilidades sólidas de comunicação, negociação e relacionamento interpessoal em um ambiente dinâmico e de alto volume.</p>
                     <div class="work-tags">
                         <span class="work-tag">Vendas</span>
                         <span class="work-tag">Atendimento ao Cliente</span>
                         <span class="work-tag">Negociação</span>
-                    </div>
-                </div>
-            </div>
+                    </div><!--work-tags-->
+                </div><!--work-card-->
+            </div><!--timeline-item-->
 
-        </div>
+        </div><!--work-timeline-->
     </section>
 
     <section class="academic-section" id="formacao" aria-label="Formações acadêmicas">
         <div class="academic-header">
             <h2>Formações <span>acadêmicas</span></h2>
             <p>Minha base acadêmica e aprendizado contínuo</p>
-        </div>
+        </div><!--academic-header-->
 
         <div class="academic-grid">
             <article class="academic-card">
@@ -462,12 +461,12 @@ start();</code></pre>
                             <path d="M14.5 9L16.5 12L14.5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M12.8 8L11.2 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
                         </svg>
-                    </div>
+                    </div><!--academic-card__icon-->
                     <div class="academic-card__date-wrap">
                         <span class="academic-card__date">Mar 2024 – Dez 2027</span>
                         <span class="academic-card__badge">ATUAL</span>
-                    </div>
-                </div>
+                    </div><!--academic-card__date-wrap-->
+                </div><!--academic-card__top-->
 
                 <span class="academic-card__label">GRADUAÇÃO</span>
                 <h3>Ciência da Computação</h3>
@@ -486,12 +485,12 @@ start();</code></pre>
                             <path d="M7 12.3L12 15L17 12.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M7 13.8V16.4C7 16.4 9.2 18.6 12 18.6C14.8 18.6 17 16.4 17 16.4V13.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                    </div>
+                    </div><!--academic-card__icon-->
                     <div class="academic-card__date-wrap">
                         <span class="academic-card__date">Início 2025</span>
                         <span class="academic-card__badge">ATUAL</span>
-                    </div>
-                </div>
+                    </div><!--academic-card__date-wrap-->
+                </div><!--academic-card__top-->
 
                 <span class="academic-card__label">PÓS-FORMAÇÃO</span>
                 <h3>Desenvolvedor Fullstack</h3>
@@ -513,12 +512,12 @@ start();</code></pre>
                             <path d="M14.5 18L17.2 11H17.4L20.1 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M15.4 15.8H19.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
                         </svg>
-                    </div>
+                    </div><!--academic-card__icon-->
                     <div class="academic-card__date-wrap">
                         <span class="academic-card__date">Início 2025</span>
                         <span class="academic-card__badge">ATUAL</span>
-                    </div>
-                </div>
+                    </div><!--academic-card__date-wrap-->
+                </div><!--academic-card__top-->
 
                 <span class="academic-card__label">IDIOMAS</span>
                 <h3>Inglês</h3>
@@ -528,7 +527,7 @@ start();</code></pre>
                 </span>
                 <p>Desenvolvimento de fluência para comunicação, leitura técnica e maior segurança em conteúdos da área de tecnologia.</p>
             </article>
-        </div>
+        </div><!--academic-grid-->
     </section>
 
     <section class="container-2" id="projetos">
@@ -536,7 +535,7 @@ start();</code></pre>
          <div class="work-header">
             <h2>Meus<span>Projetos</span></h2>
             <p>Alguns dos projetos que desenvolvi recentemente</p>
-        </div>
+        </div><!--work-header-->
         <div class="box">
             <div class="box-filhos">
                 <div class="box-img">
@@ -552,7 +551,7 @@ start();</code></pre>
                     <div class="project-tags">
                         <span class="project-tag">JavaScript</span>
                         <span class="project-tag">Chart.js</span>
-                    </div>
+                    </div><!--project-tags-->
                     <div class="project-actions">
                         <a class="project-btn project-btn--ghost" href="https://github.com/Gabriel100-Pro/Controle-de-estoque" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49C4 14.09 3.48 13.22 3.32 12.77c-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
@@ -562,7 +561,7 @@ start();</code></pre>
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 5H19V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L19 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M19 14V19H5V5H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             Demo
                         </a>
-                    </div>
+                    </div><!--project-actions-->
                 </div><!--box-item-->
 
             </div><!--box-filhos-->
@@ -581,7 +580,7 @@ start();</code></pre>
                         <span class="project-tag">HTML</span>
                         <span class="project-tag">CSS</span>
                         <span class="project-tag">JavaScript</span>
-                    </div>
+                    </div><!--project-tags-->
                     <div class="project-actions">
                         <a class="project-btn project-btn--ghost" href="https://github.com/Gabriel100-Pro/Site-oficial-InjetNobre" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49C4 14.09 3.48 13.22 3.32 12.77c-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
@@ -591,7 +590,7 @@ start();</code></pre>
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 5H19V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L19 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M19 14V19H5V5H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             Demo
                         </a>
-                    </div>
+                    </div><!--project-actions-->
                 </div><!--box-item-->
 
             </div><!--box-filhos-->
@@ -609,7 +608,7 @@ start();</code></pre>
                     <div class="project-tags">
                         <span class="project-tag">JavaScript</span>
                         <span class="project-tag">UX</span>
-                    </div>
+                    </div><!--project-tags-->
                     <div class="project-actions">
                         <a class="project-btn project-btn--ghost" href="https://github.com/Gabriel100-Pro/Projeto-de-Agendamento" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49C4 14.09 3.48 13.22 3.32 12.77c-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
@@ -619,7 +618,7 @@ start();</code></pre>
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 5H19V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L19 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M19 14V19H5V5H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             Demo
                         </a>
-                    </div>
+                    </div><!--project-actions-->
                 </div><!--box-item-->
 
             </div><!--box-filhos-->
@@ -637,7 +636,7 @@ start();</code></pre>
                     <div class="project-tags">
                         <span class="project-tag">HTML</span>
                         <span class="project-tag">CSS</span>
-                    </div>
+                    </div><!--project-tags-->
                     <div class="project-actions">
                         <a class="project-btn project-btn--ghost" href="https://github.com/Gabriel100-Pro/Projeto-Login-" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49C4 14.09 3.48 13.22 3.32 12.77c-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
@@ -647,7 +646,7 @@ start();</code></pre>
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 5H19V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14L19 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M19 14V19H5V5H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             Demo
                         </a>
-                    </div>
+                    </div><!--project-actions-->
                 </div><!--box-item-->
             </div><!--box-filhos-->
         </div><!--box-->
@@ -671,17 +670,17 @@ start();</code></pre>
                     <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M1.5 3A1.5 1.5 0 0 0 0 4.5v7A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 14.5 3h-13zm0 1h13a.5.5 0 0 1 .5.5v.2L8 8.9 1 4.7v-.2a.5.5 0 0 1 .5-.5zM1 5.9l4.7 2.82L1 12V5.9zm1.2 6.1l4.35-3.05L8 9.8l1.45-.85L13.8 12H2.2zM15 12l-4.7-3.28L15 5.9V12z"/></svg>
                     Email
                 </a>
-            </div>
+            </div><!--contact-footer__links-->
 
             <div class="contact-footer__copyright">© 2026 Gabriel Almeida</div>
-        </div>
+        </div><!--contact-footer__content-->
     </footer>
 
     <div class="icon">
         <a href="https://wa.me/976052590?text=Olá%2C%20vim%20pelo%20portif%C3%B3lio." target="_blank">
             <img src="./assets/Icon-Chat.svg" alt="Ícone de chat" class="chat-icon" aria-hidden="true">
         </a>
-    </div>
+    </div><!--icon-->
 
     <script defer src="./functions.js"></script>
     <script type="module" src="./src/main.ts"></script>

@@ -327,6 +327,46 @@ const setupHeaderNavActive = (): void => {
 	});
 };
 
+const setupSectionScrollReveal = (): void => {
+	const sections = Array.from(document.querySelectorAll<HTMLElement>("section"));
+
+	if (!sections.length) {
+		return;
+	}
+
+	sections.forEach((section, index) => {
+		section.classList.add("scroll-reveal");
+
+		if (index === 0) {
+			section.classList.add("is-visible");
+		}
+	});
+
+	const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+	if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+		sections.forEach((section) => section.classList.add("is-visible"));
+		return;
+	}
+
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				const section = entry.target as HTMLElement;
+				section.classList.toggle("is-visible", entry.isIntersecting);
+			});
+		},
+		{
+			threshold: 0.18,
+			rootMargin: "0px 0px -8% 0px"
+		}
+	);
+
+	sections.forEach((section) => {
+		observer.observe(section);
+	});
+};
+
 const initializeApp = (): void => {
 	const globalWindow = window as Window & { __portfolioAppInitialized?: boolean };
 
@@ -336,6 +376,7 @@ const initializeApp = (): void => {
 
 	globalWindow.__portfolioAppInitialized = true;
 
+	setupSectionScrollReveal();
 	setupThemeAndHeroTyping();
 	setupToolMarquee();
 	setupContactFormRedirect();

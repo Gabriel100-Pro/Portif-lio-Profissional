@@ -248,12 +248,45 @@
       });
     });
   };
+  var setupSectionScrollReveal = () => {
+    const sections = Array.from(document.querySelectorAll("section"));
+    if (!sections.length) {
+      return;
+    }
+    sections.forEach((section, index) => {
+      section.classList.add("scroll-reveal");
+      if (index === 0) {
+        section.classList.add("is-visible");
+      }
+    });
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      sections.forEach((section) => section.classList.add("is-visible"));
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const section = entry.target;
+          section.classList.toggle("is-visible", entry.isIntersecting);
+        });
+      },
+      {
+        threshold: 0.18,
+        rootMargin: "0px 0px -8% 0px"
+      }
+    );
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+  };
   var initializeApp = () => {
     const globalWindow = window;
     if (globalWindow.__portfolioAppInitialized) {
       return;
     }
     globalWindow.__portfolioAppInitialized = true;
+    setupSectionScrollReveal();
     setupThemeAndHeroTyping();
     setupToolMarquee();
     setupContactFormRedirect();
