@@ -910,9 +910,7 @@ html[data-theme="light"] .tool-marquee__img--wide{
     padding: 20px;
     border-radius: 18px;
     border: 1px solid rgba(37, 99, 235, 0.24);
-    background:
-        radial-gradient(circle at 100% 100%, rgba(37, 99, 235, 0.2), transparent 52%),
-        rgba(15, 23, 42, 0.64);
+    background: rgba(15, 23, 42, 0.7);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     margin-bottom: 18px;
@@ -962,19 +960,14 @@ html[data-theme="light"] .tool-marquee__img--wide{
 
 .about-highlight {
     border: 1px solid rgba(51, 65, 85, 0.72);
-    background:
-        radial-gradient(circle at 90% 0%, rgba(59, 130, 246, 0.1), transparent 56%),
-        rgba(2, 6, 23, 0.48);
+    background: rgba(15, 23, 42, 0.7);
     border-radius: 14px;
     padding: 16px;
 }
 
 .about-highlight:hover {
-    background:
-        radial-gradient(circle at 90% 0%, rgba(59, 130, 246, 0.2), transparent 56%),
-        rgba(2, 6, 23, 0.6);
-        transition: 150ms ease;
-        box-shadow: 4px 8px 16px rgba(37, 99, 235, 0.28);
+    transition: 150ms ease;
+    box-shadow: 4px 8px 16px rgba(37, 99, 235, 0.28);
 }
 
 .about-highlight__icon {
@@ -1050,9 +1043,7 @@ html[data-theme="light"] .about-header h2 {
 
 html[data-theme="light"] .about-panel {
     border-color: rgba(37, 99, 235, 0.3);
-    background:
-        radial-gradient(circle at 100% 100%, rgba(37, 99, 235, 0.09), transparent 58%),
-        rgba(255, 255, 255, 0.94);
+    background: rgba(255, 255, 255, 0.92);
 }
 
 html[data-theme="light"] .about-panel__photo {
@@ -1069,9 +1060,7 @@ html[data-theme="light"] .about-panel__content p {
 
 html[data-theme="light"] .about-highlight {
     border-color: rgba(203, 213, 225, 0.95);
-    background:
-        radial-gradient(circle at 90% 0%, rgba(37, 99, 235, 0.1), transparent 58%),
-        rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.92);
 }
 
 html[data-theme="light"] .about-highlight h3 {
