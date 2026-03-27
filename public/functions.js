@@ -238,6 +238,16 @@
       moveTo(activeItem);
     });
   };
+  var setupHeaderNavActive = () => {
+    const links = Array.from(document.querySelectorAll(".header-link"));
+    const internalLinks = links.filter((link) => !link.hostname || link.hostname === window.location.hostname);
+    internalLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        internalLinks.forEach((l) => l.classList.remove("active"));
+        link.classList.add("active");
+      });
+    });
+  };
   var initializeApp = () => {
     const globalWindow = window;
     if (globalWindow.__portfolioAppInitialized) {
@@ -248,6 +258,7 @@
     setupToolMarquee();
     setupContactFormRedirect();
     setupTimelineCursor();
+    setupHeaderNavActive();
   };
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initializeApp, { once: true });

@@ -315,6 +315,18 @@ const setupTimelineCursor = (): void => {
 	});
 };
 
+const setupHeaderNavActive = (): void => {
+	const links = Array.from(document.querySelectorAll<HTMLAnchorElement>(".header-link"));
+	const internalLinks = links.filter((link) => !link.hostname || link.hostname === window.location.hostname);
+
+	internalLinks.forEach((link) => {
+		link.addEventListener("click", () => {
+			internalLinks.forEach((l) => l.classList.remove("active"));
+			link.classList.add("active");
+		});
+	});
+};
+
 const initializeApp = (): void => {
 	const globalWindow = window as Window & { __portfolioAppInitialized?: boolean };
 
@@ -328,6 +340,7 @@ const initializeApp = (): void => {
 	setupToolMarquee();
 	setupContactFormRedirect();
 	setupTimelineCursor();
+	setupHeaderNavActive();
 };
 
 if (document.readyState === "loading") {
