@@ -267,11 +267,20 @@ const setupTimelineCursor = (): void => {
 		return timeline.offsetHeight - progressTop - lineBottomInset;
 	};
 
+	const getFullCursorOffset = (): number => {
+		const cursorTop = Number.parseFloat(window.getComputedStyle(cursor).top) || 0;
+		const lineEnd = timeline.offsetHeight - lineBottomInset;
+
+		return lineEnd - cursorTop - cursor.offsetHeight / 2;
+	};
+
 	const moveTo = (item: HTMLElement): void => {
 		const timelineRect = timeline.getBoundingClientRect();
 		const itemRect = item.getBoundingClientRect();
 		const itemIndex = items.indexOf(item);
-		const targetOffset = itemRect.top - timelineRect.top;
+		const targetOffset = itemIndex === items.length - 1
+			? getFullCursorOffset()
+			: itemRect.top - timelineRect.top;
 		const progressHeight = itemIndex === items.length - 1
 			? getFullProgressHeight()
 			: getBaseProgressHeight() + targetOffset;

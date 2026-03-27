@@ -202,11 +202,16 @@
       const progressTop = Number.parseFloat(window.getComputedStyle(progress).top) || 0;
       return timeline.offsetHeight - progressTop - lineBottomInset;
     };
+    const getFullCursorOffset = () => {
+      const cursorTop = Number.parseFloat(window.getComputedStyle(cursor).top) || 0;
+      const lineEnd = timeline.offsetHeight - lineBottomInset;
+      return lineEnd - cursorTop - cursor.offsetHeight / 2;
+    };
     const moveTo = (item) => {
       const timelineRect = timeline.getBoundingClientRect();
       const itemRect = item.getBoundingClientRect();
       const itemIndex = items.indexOf(item);
-      const targetOffset = itemRect.top - timelineRect.top;
+      const targetOffset = itemIndex === items.length - 1 ? getFullCursorOffset() : itemRect.top - timelineRect.top;
       const progressHeight = itemIndex === items.length - 1 ? getFullProgressHeight() : getBaseProgressHeight() + targetOffset;
       cursor.style.transform = `translateY(${targetOffset}px)`;
       progress.style.height = `${progressHeight}px`;
