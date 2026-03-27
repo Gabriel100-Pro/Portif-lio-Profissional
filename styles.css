@@ -2129,6 +2129,18 @@ html[data-theme="light"] .timeline-line {
         padding: 0 24px;
     }
 
+    .container-left .left-filhos > h1,
+    .container-left .left-filhos > h3,
+    .container-left .left-filhos > p {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .container-left .left-filhos > p {
+        max-width: 640px;
+    }
+
     .container-right {
         width: 100%;
         padding: 40px 24px;
