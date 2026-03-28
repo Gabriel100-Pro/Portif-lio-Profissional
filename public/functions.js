@@ -7,6 +7,7 @@
   var setupPortfolioLikes = () => {
     const likesSection = document.querySelector("[data-portfolio-likes]");
     const countElement = likesSection?.querySelector("[data-like-count]") ?? null;
+    const peopleElement = likesSection?.querySelector("[data-like-people]") ?? null;
     const likeButton = likesSection?.querySelector("[data-like-button]") ?? null;
     const statusElement = likesSection?.querySelector("[data-like-status]") ?? null;
     const iconElement = likesSection?.querySelector(".portfolio-likes__icon") ?? null;
@@ -28,7 +29,12 @@
       statusElement.dataset.state = state;
     };
     const renderCount = (count) => {
-      countElement.textContent = numberFormatter.format(Math.max(0, count));
+      const normalizedCount = Math.max(0, count);
+      countElement.textContent = numberFormatter.format(normalizedCount);
+      if (peopleElement) {
+        const peopleLabel = normalizedCount === 1 ? "pessoa deixou o like." : "pessoas deixaram o like.";
+        peopleElement.textContent = `${numberFormatter.format(normalizedCount)} ${peopleLabel}`;
+      }
     };
     const updateButton = (options) => {
       const isLoading = options?.loading ?? false;

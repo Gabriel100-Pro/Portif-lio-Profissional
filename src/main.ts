@@ -17,6 +17,7 @@ const getElementById = <T extends HTMLElement>(id: string): T | null => {
 const setupPortfolioLikes = (): void => {
 	const likesSection = document.querySelector<HTMLElement>("[data-portfolio-likes]");
 	const countElement = likesSection?.querySelector<HTMLElement>("[data-like-count]") ?? null;
+	const peopleElement = likesSection?.querySelector<HTMLElement>("[data-like-people]") ?? null;
 	const likeButton = likesSection?.querySelector<HTMLButtonElement>("[data-like-button]") ?? null;
 	const statusElement = likesSection?.querySelector<HTMLElement>("[data-like-status]") ?? null;
 	const iconElement = likesSection?.querySelector<HTMLElement>(".portfolio-likes__icon") ?? null;
@@ -42,7 +43,13 @@ const setupPortfolioLikes = (): void => {
 	};
 
 	const renderCount = (count: number): void => {
-		countElement.textContent = numberFormatter.format(Math.max(0, count));
+		const normalizedCount = Math.max(0, count);
+		countElement.textContent = numberFormatter.format(normalizedCount);
+
+		if (peopleElement) {
+			const peopleLabel = normalizedCount === 1 ? "pessoa deixou o like." : "pessoas deixaram o like.";
+			peopleElement.textContent = `${numberFormatter.format(normalizedCount)} ${peopleLabel}`;
+		}
 	};
 
 	const updateButton = (options?: { loading?: boolean }): void => {
