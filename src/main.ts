@@ -1,10 +1,5 @@
 type Theme = "light" | "dark";
 
-type TypedTextNode = {
-	node: Text;
-	text: string;
-};
-
 type CountApiResponse = {
 	count?: number;
 	error?: string;
@@ -243,80 +238,61 @@ const setupThemeAndHeroTyping = (): void => {
 		});
 	}
 
-	const elementsToType = document.querySelectorAll<HTMLElement>(
-		".left-filhos h1, .left-filhos h3, .left-filhos > p:not(.text-one)"
-	);
+	const roleTypedText = document.querySelector<HTMLSpanElement>(".hero-intro__role span");
 
-	if (!elementsToType.length) {
+	if (!roleTypedText) {
 		return;
 	}
 
-	const textNodes: TypedTextNode[] = [];
-
-	elementsToType.forEach((element) => {
-		const textNodeWalker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, {
-			acceptNode(node: Node): number {
-				if (!(node instanceof Text) || !node.nodeValue || !node.nodeValue.trim()) {
-					return NodeFilter.FILTER_REJECT;
-				}
-
-				return NodeFilter.FILTER_ACCEPT;
-			}
-		});
-
-		let currentNode = textNodeWalker.nextNode();
-
-		while (currentNode) {
-			if (!(currentNode instanceof Text)) {
-				currentNode = textNodeWalker.nextNode();
-				continue;
-			}
-
-			const normalizedText = currentNode.data.replace(/\s+/g, " ").trim();
-
-			if (normalizedText) {
-				textNodes.push({
-					node: currentNode,
-					text: normalizedText
-				});
-				currentNode.data = "";
-			}
-
-			currentNode = textNodeWalker.nextNode();
-		}
-	});
-
-	if (!textNodes.length) {
+	if (roleTypedText.dataset.typingInitialized === "true") {
 		return;
 	}
 
-	const typingSpeed = 26;
-	const betweenNodesDelay = 70;
+	roleTypedText.dataset.typingInitialized = "true";
 
-	const typeNode = (nodeIndex: number): void => {
-		if (nodeIndex >= textNodes.length) {
-			return;
+	const words = ["FrontEnd", "JavaScript", "HTML", "TypeScript", "CSS", "Front-End"];
+
+	if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+		roleTypedText.textContent = words[0];
+		return;
+	}
+
+	let wordIndex = 0;
+	let charIndex = 0;
+	let isDeleting = false;
+
+	const typingSpeed = 110;
+	const deletingSpeed = 70;
+	const holdAfterType = 1150;
+	const holdAfterDelete = 220;
+
+	const tick = (): void => {
+		const currentWord = words[wordIndex];
+
+		if (isDeleting) {
+			charIndex = Math.max(0, charIndex - 1);
+		} else {
+			charIndex = Math.min(currentWord.length, charIndex + 1);
 		}
 
-		const currentItem = textNodes[nodeIndex];
-		let charIndex = 0;
+		roleTypedText.textContent = currentWord.slice(0, charIndex);
 
-		const typeChar = (): void => {
-			currentItem.node.nodeValue = currentItem.text.slice(0, charIndex);
+		let nextDelay = isDeleting ? deletingSpeed : typingSpeed;
 
-			if (charIndex < currentItem.text.length) {
-				charIndex += 1;
-				window.setTimeout(typeChar, typingSpeed);
-				return;
-			}
+		if (!isDeleting && charIndex === currentWord.length) {
+			isDeleting = true;
+			nextDelay = holdAfterType;
+		} else if (isDeleting && charIndex === 0) {
+			isDeleting = false;
+			wordIndex = (wordIndex + 1) % words.length;
+			nextDelay = holdAfterDelete;
+		}
 
-			window.setTimeout(() => typeNode(nodeIndex + 1), betweenNodesDelay);
-		};
-
-		typeChar();
+		window.setTimeout(tick, nextDelay);
 	};
 
-	typeNode(0);
+	roleTypedText.textContent = "";
+	window.setTimeout(tick, 360);
 };
 
 const setupToolMarquee = (): void => {
@@ -483,12 +459,8 @@ const setupSectionScrollReveal = (): void => {
 		return;
 	}
 
-	sections.forEach((section, index) => {
+	sections.forEach((section) => {
 		section.classList.add("scroll-reveal");
-
-		if (index === 0) {
-			section.classList.add("is-visible");
-		}
 	});
 
 	const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
