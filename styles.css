@@ -546,6 +546,185 @@ p {
     box-shadow: 2px 6px 10px rgba(37, 99, 235, 0.24);
 }
 
+.portfolio-likes {
+    width: 100%;
+    padding: 0 16px;
+    margin: 48px 0;
+}
+
+.portfolio-likes__inner {
+    width: min(980px, 100%);
+    margin: 0 auto;
+    padding: 28px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+    gap: 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(51, 65, 85, 0.7);
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    overflow: hidden;
+}
+
+.portfolio-likes__content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.portfolio-likes__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    min-height: 30px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(125, 211, 252, 0.28);
+    background: rgba(8, 47, 73, 0.45);
+    color: #7dd3fc;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.portfolio-likes h2 {
+    margin: 0;
+    color: #f8fafc;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.portfolio-likes p {
+    margin: 0;
+    color: #94a3b8;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.portfolio-likes__panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(51, 65, 85, 0.5);
+    background: rgba(15, 23, 42, 0.5);
+}
+
+.portfolio-likes__counter {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 12px;
+    row-gap: 2px;
+}
+
+.portfolio-likes__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #60a5fa;
+    background: rgba(37, 99, 235, 0.16);
+    border: 1px solid rgba(37, 99, 235, 0.35);
+}
+
+.portfolio-likes__icon svg {
+    width: 22px;
+    height: 22px;
+    transition: transform 0.15s ease;
+}
+
+@keyframes heart-bounce {
+    0%   { transform: scale(1); }
+    20%  { transform: scale(1.5); }
+    45%  { transform: scale(0.88); }
+    70%  { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
+
+.portfolio-likes__icon.is-bouncing svg {
+    animation: heart-bounce 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+.portfolio-likes__count {
+    color: #ffffff;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1;
+}
+
+.portfolio-likes__caption {
+    grid-column: 2;
+    color: #94a3b8;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.portfolio-likes__button {
+    min-height: 48px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 58%, #06b6d4 100%);
+    color: #ffffff;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+}
+
+.portfolio-likes__button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(239, 68, 68, 0.22);
+}
+
+.portfolio-likes__button:disabled {
+    cursor: not-allowed;
+    opacity: 0.78;
+}
+
+.portfolio-likes__button.is-liked {
+    background: linear-gradient(90deg, #059669 0%, #10b981 100%);
+}
+
+.portfolio-likes__button.is-liked:hover {
+    background: linear-gradient(90deg, #dc2626 0%, #ef4444 100%);
+    box-shadow: 0 14px 28px rgba(239, 68, 68, 0.22);
+    transform: translateY(-2px);
+}
+
+.portfolio-likes__status {
+    min-height: 20px;
+    color: #94a3b8;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+}
+
+.portfolio-likes__status[data-state="success"] {
+    color: #86efac;
+}
+
+.portfolio-likes__status[data-state="error"] {
+    color: #fca5a5;
+}
+
+.portfolio-likes__status[data-state="loading"] {
+    color: #7dd3fc;
+}
+
 html[data-theme="light"] .skills-title {
     background: rgba(255, 255, 255, 0.92);
     border-color: #cbd5e1;
@@ -553,6 +732,39 @@ html[data-theme="light"] .skills-title {
 
 html[data-theme="light"] .skills-title:hover {
     border-color: rgba(37, 99, 235, 0.42);
+}
+
+html[data-theme="light"] .portfolio-likes__inner {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: #cbd5e1;
+}
+
+html[data-theme="light"] .portfolio-likes__eyebrow {
+    border-color: rgba(37, 99, 235, 0.2);
+    background: rgba(219, 234, 254, 0.82);
+    color: #1d4ed8;
+}
+
+html[data-theme="light"] .portfolio-likes h2 {
+    color: #0f172a;
+}
+
+html[data-theme="light"] .portfolio-likes p {
+    color: #475569;
+}
+
+html[data-theme="light"] .portfolio-likes__panel {
+    border-color: #cbd5e1;
+    background: rgba(241, 245, 249, 0.7);
+}
+
+html[data-theme="light"] .portfolio-likes__count {
+    color: #0f172a;
+}
+
+html[data-theme="light"] .portfolio-likes__caption,
+html[data-theme="light"] .portfolio-likes__status {
+    color: #64748b;
 }
 
 .container-right {
@@ -1988,6 +2200,10 @@ html[data-theme="light"] .timeline-line {
         gap: 20px;
     }
 
+    .portfolio-likes__inner {
+        grid-template-columns: 1fr;
+    }
+
     .box {
         width: calc(100% - 32px);
         gap: 14px;
@@ -2089,6 +2305,23 @@ html[data-theme="light"] .timeline-line {
 
     .box-item p {
         font-size: 13px;
+    }
+
+    .skills {
+        flex-direction: column;
+    }
+
+    .portfolio-likes__inner {
+        padding: 20px;
+        gap: 16px;
+    }
+
+    .portfolio-likes__panel {
+        padding: 16px;
+    }
+
+    .portfolio-likes__count {
+        font-size: 30px;
     }
 
     .contact-footer {

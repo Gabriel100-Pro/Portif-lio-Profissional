@@ -5,8 +5,150 @@ type TypedTextNode = {
 	text: string;
 };
 
+type CountApiResponse = {
+	count?: number;
+	error?: string;
+};
+
 const getElementById = <T extends HTMLElement>(id: string): T | null => {
 	return document.getElementById(id) as T | null;
+};
+
+const setupPortfolioLikes = (): void => {
+	const likesSection = document.querySelector<HTMLElement>("[data-portfolio-likes]");
+	const countElement = likesSection?.querySelector<HTMLElement>("[data-like-count]") ?? null;
+	const likeButton = likesSection?.querySelector<HTMLButtonElement>("[data-like-button]") ?? null;
+	const statusElement = likesSection?.querySelector<HTMLElement>("[data-like-status]") ?? null;
+	const iconElement = likesSection?.querySelector<HTMLElement>(".portfolio-likes__icon") ?? null;
+
+	if (!likesSection || !countElement || !likeButton || !statusElement) {
+		return;
+	}
+
+	const apiNamespace = "portfolio-gabriel-carlos-alexandre-almeida";
+	const apiKey = "total-likes";
+	const storageKey = "portfolio-liked-v1";
+	const baseUrl = "https://api.counterapi.dev/v1";
+	const getUrl = `${baseUrl}/${apiNamespace}/${apiKey}`;
+	const upUrl = `${baseUrl}/${apiNamespace}/${apiKey}/up`;
+	const downUrl = `${baseUrl}/${apiNamespace}/${apiKey}/down`;
+	const numberFormatter = new Intl.NumberFormat("pt-BR");
+	let hasLiked = localStorage.getItem(storageKey) === "true";
+	let currentCount = 0;
+
+	const setStatus = (message: string, state: "idle" | "loading" | "success" | "error" = "idle"): void => {
+		statusElement.textContent = message;
+		statusElement.dataset.state = state;
+	};
+
+	const renderCount = (count: number): void => {
+		countElement.textContent = numberFormatter.format(Math.max(0, count));
+	};
+
+	const updateButton = (options?: { loading?: boolean }): void => {
+		const isLoading = options?.loading ?? false;
+
+		if (isLoading) {
+			likeButton.disabled = true;
+			likeButton.textContent = "Aguarde...";
+			return;
+		}
+
+		likeButton.disabled = false;
+		likeButton.textContent = hasLiked ? "Tirar meu like" : "Deixar meu like";
+		likeButton.classList.toggle("is-liked", hasLiked);
+		likeButton.setAttribute("aria-pressed", String(hasLiked));
+	};
+
+	const parseCount = (payload: CountApiResponse): number => {
+		if (typeof payload.count === "number" && Number.isFinite(payload.count)) {
+			return Math.max(0, payload.count);
+		}
+
+		if (payload.error) {
+			throw new Error(payload.error);
+		}
+
+		return 0;
+	};
+
+	const loadLikes = async (): Promise<void> => {
+		setStatus("Carregando likes...", "loading");
+
+		try {
+			const response = await fetch(getUrl, { cache: "no-store" });
+
+			if (!response.ok) {
+				throw new Error(`HTTP ${response.status}`);
+			}
+
+			const payload = (await response.json()) as CountApiResponse;
+			currentCount = parseCount(payload);
+			renderCount(currentCount);
+			setStatus(
+				hasLiked
+					? "Voce ja curtiu este portfolio. Clique para desfazer."
+					: "Gostou do portfolio? Clique para deixar seu like.",
+				hasLiked ? "success" : "idle"
+			);
+		} catch {
+			renderCount(currentCount);
+			setStatus("Nao foi possivel carregar os likes agora.", "error");
+		}
+	};
+
+	const toggleLike = async (): Promise<void> => {
+		updateButton({ loading: true });
+
+		const url = hasLiked ? downUrl : upUrl;
+		const isRemoving = hasLiked;
+
+		try {
+			const response = await fetch(url, { cache: "no-store" });
+
+			if (!response.ok) {
+				throw new Error(`HTTP ${response.status}`);
+			}
+
+			const payload = (await response.json()) as CountApiResponse;
+			currentCount = parseCount(payload);
+			hasLiked = !isRemoving;
+			localStorage.setItem(storageKey, String(hasLiked));
+			renderCount(currentCount);
+
+			if (hasLiked && iconElement) {
+				iconElement.classList.remove("is-bouncing");
+				void iconElement.offsetWidth;
+				iconElement.classList.add("is-bouncing");
+				iconElement.addEventListener("animationend", () => {
+					iconElement.classList.remove("is-bouncing");
+				}, { once: true });
+			}
+
+			setStatus(
+				hasLiked
+					? "Like registrado. Obrigado por apoiar meu trabalho."
+					: "Like removido.",
+				hasLiked ? "success" : "idle"
+			);
+		} catch {
+			setStatus(
+				isRemoving
+					? "Nao foi possivel remover seu like agora."
+					: "Nao foi possivel registrar seu like agora.",
+				"error"
+			);
+		} finally {
+			updateButton();
+		}
+	};
+
+	renderCount(0);
+	updateButton();
+	void loadLikes();
+	likeButton.addEventListener("click", () => {
+		void toggleLike();
+	});
 };
 
 const setupThemeAndHeroTyping = (): void => {
@@ -209,7 +351,7 @@ const setupToolMarquee = (): void => {
 		window.requestAnimationFrame(fillMarquee);
 	};
 
-	if (document.readyState === "complete") {
+		if (document.readyState === "complete") {
 		scheduleFill();
 	} else {
 		window.addEventListener("load", scheduleFill, { once: true });
@@ -378,6 +520,7 @@ const initializeApp = (): void => {
 
 	setupSectionScrollReveal();
 	setupThemeAndHeroTyping();
+	setupPortfolioLikes();
 	setupToolMarquee();
 	setupContactFormRedirect();
 	setupTimelineCursor();
