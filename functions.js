@@ -32,6 +32,10 @@
       const normalizedCount = Math.max(0, count);
       countElement.textContent = numberFormatter.format(normalizedCount);
       if (peopleElement) {
+        if (normalizedCount === 0) {
+          peopleElement.textContent = "Seja a primeira pessoa a deixar o like.";
+          return;
+        }
         const peopleLabel = normalizedCount === 1 ? "pessoa deixou o like." : "pessoas deixaram o like.";
         peopleElement.textContent = `${numberFormatter.format(normalizedCount)} ${peopleLabel}`;
       }
