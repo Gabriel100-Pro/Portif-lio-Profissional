@@ -4,6 +4,103 @@
   var getElementById = (id) => {
     return document.getElementById(id);
   };
+  var setupNetworkBackground = () => {
+    const canvasId = "network-background";
+    if (document.getElementById(canvasId)) {
+      return;
+    }
+    const canvas = document.createElement("canvas");
+    canvas.id = canvasId;
+    canvas.setAttribute("aria-hidden", "true");
+    document.body.prepend(canvas);
+    const context = canvas.getContext("2d");
+    if (!context) {
+      return;
+    }
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let particles = [];
+    let animationFrameId = 0;
+    const maxDpr = 2;
+    const connectionDistance = 170;
+    const movementSpeed = 0.26;
+    const getTargetParticleCount = () => {
+      const area = width * height;
+      return Math.max(28, Math.min(92, Math.floor(area / 24e3)));
+    };
+    const createParticles = () => {
+      const count = getTargetParticleCount();
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * movementSpeed,
+        vy: (Math.random() - 0.5) * movementSpeed,
+        radius: 1.2 + Math.random() * 1.8
+      }));
+    };
+    const resizeCanvas = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+      createParticles();
+    };
+    const drawFrame = () => {
+      context.clearRect(0, 0, width, height);
+      for (const particle of particles) {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+        if (particle.x <= 0 || particle.x >= width) {
+          particle.vx *= -1;
+        }
+        if (particle.y <= 0 || particle.y >= height) {
+          particle.vy *= -1;
+        }
+      }
+      for (let i = 0; i < particles.length; i += 1) {
+        const first = particles[i];
+        for (let j = i + 1; j < particles.length; j += 1) {
+          const second = particles[j];
+          const dx = first.x - second.x;
+          const dy = first.y - second.y;
+          const distance = Math.hypot(dx, dy);
+          if (distance > connectionDistance) {
+            continue;
+          }
+          const alpha = 1 - distance / connectionDistance;
+          context.strokeStyle = `rgba(96, 165, 250, ${0.22 * alpha})`;
+          context.lineWidth = 0.85;
+          context.beginPath();
+          context.moveTo(first.x, first.y);
+          context.lineTo(second.x, second.y);
+          context.stroke();
+        }
+      }
+      for (const particle of particles) {
+        context.beginPath();
+        context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+        context.fillStyle = "rgba(147, 197, 253, 0.95)";
+        context.fill();
+      }
+      animationFrameId = window.requestAnimationFrame(drawFrame);
+    };
+    resizeCanvas();
+    drawFrame();
+    window.addEventListener("resize", resizeCanvas);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        window.cancelAnimationFrame(animationFrameId);
+        return;
+      }
+      window.cancelAnimationFrame(animationFrameId);
+      drawFrame();
+    });
+  };
   var setupPortfolioLikes = () => {
     const likesSection = document.querySelector("[data-portfolio-likes]");
     const countElement = likesSection?.querySelector("[data-like-count]") ?? null;
@@ -191,62 +288,47 @@
         }
       });
     }
-    const elementsToType = document.querySelectorAll(
-      ".left-filhos h1, .left-filhos h3, .left-filhos > p:not(.text-one)"
-    );
-    if (!elementsToType.length) {
+    const roleTypedText = document.querySelector(".hero-intro__role span");
+    if (!roleTypedText) {
       return;
     }
-    const textNodes = [];
-    elementsToType.forEach((element) => {
-      const textNodeWalker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, {
-        acceptNode(node) {
-          if (!(node instanceof Text) || !node.nodeValue || !node.nodeValue.trim()) {
-            return NodeFilter.FILTER_REJECT;
-          }
-          return NodeFilter.FILTER_ACCEPT;
-        }
-      });
-      let currentNode = textNodeWalker.nextNode();
-      while (currentNode) {
-        if (!(currentNode instanceof Text)) {
-          currentNode = textNodeWalker.nextNode();
-          continue;
-        }
-        const normalizedText = currentNode.data.replace(/\s+/g, " ").trim();
-        if (normalizedText) {
-          textNodes.push({
-            node: currentNode,
-            text: normalizedText
-          });
-          currentNode.data = "";
-        }
-        currentNode = textNodeWalker.nextNode();
-      }
-    });
-    if (!textNodes.length) {
+    if (roleTypedText.dataset.typingInitialized === "true") {
       return;
     }
-    const typingSpeed = 26;
-    const betweenNodesDelay = 70;
-    const typeNode = (nodeIndex) => {
-      if (nodeIndex >= textNodes.length) {
-        return;
+    roleTypedText.dataset.typingInitialized = "true";
+    const words = ["FrontEnd", "JavaScript", "HTML", "TypeScript", "CSS", "Front-End"];
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      roleTypedText.textContent = words[0];
+      return;
+    }
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typingSpeed = 110;
+    const deletingSpeed = 70;
+    const holdAfterType = 1150;
+    const holdAfterDelete = 220;
+    const tick = () => {
+      const currentWord = words[wordIndex];
+      if (isDeleting) {
+        charIndex = Math.max(0, charIndex - 1);
+      } else {
+        charIndex = Math.min(currentWord.length, charIndex + 1);
       }
-      const currentItem = textNodes[nodeIndex];
-      let charIndex = 0;
-      const typeChar = () => {
-        currentItem.node.nodeValue = currentItem.text.slice(0, charIndex);
-        if (charIndex < currentItem.text.length) {
-          charIndex += 1;
-          window.setTimeout(typeChar, typingSpeed);
-          return;
-        }
-        window.setTimeout(() => typeNode(nodeIndex + 1), betweenNodesDelay);
-      };
-      typeChar();
+      roleTypedText.textContent = currentWord.slice(0, charIndex);
+      let nextDelay = isDeleting ? deletingSpeed : typingSpeed;
+      if (!isDeleting && charIndex === currentWord.length) {
+        isDeleting = true;
+        nextDelay = holdAfterType;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        nextDelay = holdAfterDelete;
+      }
+      window.setTimeout(tick, nextDelay);
     };
-    typeNode(0);
+    roleTypedText.textContent = "";
+    window.setTimeout(tick, 360);
   };
   var setupToolMarquee = () => {
     const marquee = document.querySelector(".tool-marquee");
@@ -371,11 +453,8 @@
     if (!sections.length) {
       return;
     }
-    sections.forEach((section, index) => {
+    sections.forEach((section) => {
       section.classList.add("scroll-reveal");
-      if (index === 0) {
-        section.classList.add("is-visible");
-      }
     });
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion || !("IntersectionObserver" in window)) {
@@ -404,6 +483,7 @@
       return;
     }
     globalWindow.__portfolioAppInitialized = true;
+    setupNetworkBackground();
     setupSectionScrollReveal();
     setupThemeAndHeroTyping();
     setupPortfolioLikes();

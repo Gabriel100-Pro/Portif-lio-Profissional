@@ -9,6 +9,133 @@ const getElementById = <T extends HTMLElement>(id: string): T | null => {
 	return document.getElementById(id) as T | null;
 };
 
+type NetworkParticle = {
+	x: number;
+	y: number;
+	vx: number;
+	vy: number;
+	radius: number;
+};
+
+const setupNetworkBackground = (): void => {
+	const canvasId = "network-background";
+	if (document.getElementById(canvasId)) {
+		return;
+	}
+
+	const canvas = document.createElement("canvas");
+	canvas.id = canvasId;
+	canvas.setAttribute("aria-hidden", "true");
+	document.body.prepend(canvas);
+
+	const context = canvas.getContext("2d");
+	if (!context) {
+		return;
+	}
+
+	let width = 0;
+	let height = 0;
+	let dpr = 1;
+	let particles: NetworkParticle[] = [];
+	let animationFrameId = 0;
+	const maxDpr = 2;
+	const connectionDistance = 170;
+	const movementSpeed = 0.26;
+
+	const getTargetParticleCount = (): number => {
+		const area = width * height;
+		return Math.max(28, Math.min(92, Math.floor(area / 24000)));
+	};
+
+	const createParticles = (): void => {
+		const count = getTargetParticleCount();
+		particles = Array.from({ length: count }, () => ({
+			x: Math.random() * width,
+			y: Math.random() * height,
+			vx: (Math.random() - 0.5) * movementSpeed,
+			vy: (Math.random() - 0.5) * movementSpeed,
+			radius: 1.2 + Math.random() * 1.8
+		}));
+	};
+
+	const resizeCanvas = (): void => {
+		width = window.innerWidth;
+		height = window.innerHeight;
+		dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
+
+		canvas.width = Math.floor(width * dpr);
+		canvas.height = Math.floor(height * dpr);
+		canvas.style.width = `${width}px`;
+		canvas.style.height = `${height}px`;
+
+		context.setTransform(dpr, 0, 0, dpr, 0, 0);
+		createParticles();
+	};
+
+	const drawFrame = (): void => {
+		context.clearRect(0, 0, width, height);
+
+		for (const particle of particles) {
+			particle.x += particle.vx;
+			particle.y += particle.vy;
+
+			if (particle.x <= 0 || particle.x >= width) {
+				particle.vx *= -1;
+			}
+
+			if (particle.y <= 0 || particle.y >= height) {
+				particle.vy *= -1;
+			}
+		}
+
+		for (let i = 0; i < particles.length; i += 1) {
+			const first = particles[i];
+
+			for (let j = i + 1; j < particles.length; j += 1) {
+				const second = particles[j];
+				const dx = first.x - second.x;
+				const dy = first.y - second.y;
+				const distance = Math.hypot(dx, dy);
+
+				if (distance > connectionDistance) {
+					continue;
+				}
+
+				const alpha = 1 - distance / connectionDistance;
+				context.strokeStyle = `rgba(96, 165, 250, ${0.22 * alpha})`;
+				context.lineWidth = 0.85;
+				context.beginPath();
+				context.moveTo(first.x, first.y);
+				context.lineTo(second.x, second.y);
+				context.stroke();
+			}
+		}
+
+		for (const particle of particles) {
+			context.beginPath();
+			context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+			context.fillStyle = "rgba(147, 197, 253, 0.95)";
+			context.fill();
+		}
+
+		animationFrameId = window.requestAnimationFrame(drawFrame);
+	};
+
+	resizeCanvas();
+	drawFrame();
+
+	window.addEventListener("resize", resizeCanvas);
+	document.addEventListener("visibilitychange", () => {
+		if (document.hidden) {
+			window.cancelAnimationFrame(animationFrameId);
+			return;
+		}
+
+		window.cancelAnimationFrame(animationFrameId);
+		drawFrame();
+	});
+};
+
 const setupPortfolioLikes = (): void => {
 	const likesSection = document.querySelector<HTMLElement>("[data-portfolio-likes]");
 	const countElement = likesSection?.querySelector<HTMLElement>("[data-like-count]") ?? null;
@@ -502,6 +629,7 @@ const initializeApp = (): void => {
 
 	globalWindow.__portfolioAppInitialized = true;
 
+	setupNetworkBackground();
 	setupSectionScrollReveal();
 	setupThemeAndHeroTyping();
 	setupPortfolioLikes();
