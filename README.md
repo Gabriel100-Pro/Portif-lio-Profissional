@@ -18,6 +18,13 @@
   <img src="https://img.shields.io/badge/Vite-646CFF.svg?style=for-the-badge&logo=Vite&logoColor=white" alt="Badge Vite">
 </p>
 
+<p align="center">
+  🔗 <strong>Ver online:</strong>
+  <a href="https://gabriel100-pro.github.io/Portif-lio-Profissional/" target="_blank">
+    https://gabriel100-pro.github.io/Portif-lio-Profissional/
+  </a>
+</p>
+
 <hr>
 
 <h2>🧠 O que tem aqui?</h2>
