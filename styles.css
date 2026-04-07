@@ -2622,6 +2622,7 @@ html[data-theme="light"] .timeline-line {
 
     .about-panel__photo {
         width: min(160px, 54vw);
+        margin: 0 auto;
     }
 
     .about-panel__content p {
